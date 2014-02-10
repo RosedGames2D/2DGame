@@ -46,7 +46,6 @@ public class Main extends Game {
 		configuration.height = 608;
 		configuration.resizable = false;
 		configuration.title = "2D Game";
-		configuration.useGL20 = true;
 		configuration.backgroundFPS = 120;
 		configuration.foregroundFPS = 120;
 		
