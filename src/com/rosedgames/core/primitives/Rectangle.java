@@ -30,7 +30,6 @@ public class Rectangle extends GameObject {
 	@Override
 	public void render() {
 		super.render();
-		
 		renderer.begin(shapeType);
 		renderer.setColor(color.x, color.y, color.z, color.w);
 		renderer.rect(pos.x, pos.y, dim.x, dim.y);
@@ -40,13 +39,14 @@ public class Rectangle extends GameObject {
 	@Override
 	public void dispose() {
 		super.dispose();
-		
 		renderer.dispose();
 	}
 	
 	public void setRendererType(ShapeType type) {
-		if((type != ShapeType.Filled) && (type != ShapeType.Line))
+		if((type != ShapeType.Filled) && (type != ShapeType.Line)) {
+			System.err.println("ShapeType." + type.toString() + " is not supported by the Rectangle class. Use either ShapeType.Filled or ShapeType.Line.\nDefaulting to ShapeType.Filled.");
 			type = ShapeType.Filled;
+		}
 		shapeType = type;
 	}
 	
