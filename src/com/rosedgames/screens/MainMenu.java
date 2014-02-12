@@ -6,12 +6,24 @@ import com.rosedgames.core.Screen;
 import com.rosedgames.ui.UIHandler;
 import com.rosedgames.uis.UIMainMenu;
 
+/**
+ * Contains the contents and instructions for rendering and updating the MainMenu
+ * 
+ * @author Liam Potter
+ */
 public class MainMenu extends Screen {
 	
+	/**
+	 * Calls the superclass' constructor
+	 * @param game
+	 */
 	public MainMenu(Main game) {
 		super(game);
 	}
 
+	/**
+	 * Code to be ran when this class is instantiated
+	 */
 	@Override
 	public void show() {
 		Gdx.gl.glClearColor(1.0f, 1.0f, 0.5f, 1.0f);
