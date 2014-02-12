@@ -9,6 +9,7 @@ public class GameObject {
 	
 	public GameObject() {
 		children = new ArrayList<GameObject>();
+		components = new ArrayList<GameComponent>();
 	}
 
 	public void addChild(GameObject child) {
