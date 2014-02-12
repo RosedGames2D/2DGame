@@ -20,7 +20,7 @@ public class MainMenu extends Screen {
 		
 		UIHandler.addUI(gui);
 		
-		getRootObj().addComponent(UIHandler.getUI("UIMainMenu"));
+		getRootObj().addChild(UIHandler.getUI("UIMainMenu"));
 	}
 	
 }

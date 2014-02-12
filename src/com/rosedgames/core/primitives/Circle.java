@@ -44,7 +44,7 @@ public class Circle extends GameObject {
 	
 	public void setRendererType(ShapeType type) {
 		if((type != ShapeType.Filled) && (type != ShapeType.Line)) {
-			System.err.println("ShapeType." + type.toString() + " is not supported by the Rectangle class. Use either ShapeType.Filled or ShapeType.Line.\nDefaulting to ShapeType.Filled.");
+			System.err.println("ShapeType." + type.toString() + " is not supported by the Circle class. Use either ShapeType.Filled or ShapeType.Line.\nDefaulting to ShapeType.Filled.");
 			type = ShapeType.Filled;
 		}
 		shapeType = type;

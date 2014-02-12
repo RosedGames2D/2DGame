@@ -34,6 +34,8 @@ public class Rectangle extends GameObject {
 		renderer.setColor(color.x, color.y, color.z, color.w);
 		renderer.rect(pos.x, pos.y, dim.x, dim.y);
 		renderer.end();
+		
+		System.out.println("Drawing Rectangle");
 	}
 	
 	@Override
