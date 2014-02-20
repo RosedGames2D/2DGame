@@ -12,9 +12,7 @@ public class Main extends Game {
 	
 	@Override
 	public void create() {
-		setScreen(mainMenu);
-		
-		//Load all configs/mods etc.
+		setScreen(mainMenu);		
 	}
 	
 	@Override

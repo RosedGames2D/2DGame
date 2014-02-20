@@ -22,7 +22,7 @@ public class MainMenu extends Screen {
 	}
 
 	/**
-	 * Code to be ran when this class is instantiated
+	 * Code to be ran when this screen is shown
 	 */
 	@Override
 	public void show() {
