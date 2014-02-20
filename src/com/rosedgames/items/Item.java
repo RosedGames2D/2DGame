@@ -1,14 +1,26 @@
 package com.rosedgames.items;
 
-import com.google.gson.annotations.SerializedName;
-import com.rosedgames.core.GameObject;
+import com.rosedgames.core.GameComponent;
 
-public class Item extends GameObject {
+public abstract class Item implements GameComponent {
 
-	@SerializedName("n")
 	private String name;
-	@SerializedName("id")
 	private int id;
+	
+	@Override
+	public void update(float delta) {
+		//Update stuff...
+	}
+
+	@Override
+	public void render() {
+		//Render stuff...
+	}
+
+	@Override
+	public void dispose() {
+		//Disposal stuff...
+	}
 	
 	public String getName() {
 		return name;

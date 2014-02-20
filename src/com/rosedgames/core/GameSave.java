@@ -11,7 +11,6 @@ import java.util.Base64;
 import com.google.gson.Gson;
 import com.rosedgames.items.Inventory;
 
-//TODO: Implement Base64 encoding/decoding
 public class GameSave {
 
 	private SaveData data = null;
@@ -45,7 +44,7 @@ public class GameSave {
 		data = new SaveData();
 		data.player = new Player();
 		data.inventory = new Inventory();
-		data.worldName = "Null";
+		data.level = "Null";
 		
 		save();
 	}
@@ -65,8 +64,8 @@ public class GameSave {
 	
 	private final class SaveData {
 		public Player player;
-		public String worldName;
-		public Inventory inventory;;
+		public String level;
+		public Inventory inventory;
 	}
 	
 }

@@ -8,6 +8,7 @@ public class World extends GameObject {
 	private TiledMap map;
 	private OrthogonalTiledMapRenderer renderer;
 	private String name;
+	private Player player;
 	
 	public World(TiledMap map, String name) {
 		this.map = map;
@@ -17,7 +18,8 @@ public class World extends GameObject {
 	
 	private void init() {
 		this.renderer = new OrthogonalTiledMapRenderer(map);
-
+		this.player = new Player(); //Get from save file soon
+		
 		//Load Map Properties, GameObjects, GameComponents etc...
 	}
 	
