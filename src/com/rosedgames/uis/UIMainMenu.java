@@ -2,7 +2,7 @@ package com.rosedgames.uis;
 
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.rosedgames.ui.UI;
-import com.rosedgames.utils.ResourceLoader;
+import com.rosedgames.ui.UIHandler;
 
 /**
  * Stores the contents and instructions for the MainMenu UI
@@ -18,7 +18,7 @@ public class UIMainMenu extends UI {
 	public UIMainMenu(String name) {
 		super(name);
 		
-		getStage().addActor(new TextButton("Btn", ResourceLoader.getSkin("Btn", ResourceLoader.getTextureAtlas("Btn"))));
+		getStage().addActor(new TextButton("Btn", UIHandler.getSkin("Text Buttons")));
 	}
 
 	/**

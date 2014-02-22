@@ -1,6 +1,8 @@
 package com.rosedgames.core;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Allows simple architectural game design
@@ -9,71 +11,99 @@ import java.util.ArrayList;
  */
 public class GameObject {
 	
-	/**
-	 * Contains all the child GameObject instances for the current GameObject
-	 */
 	private ArrayList<GameObject> children;
-	/**
-	 * Contains all the child GameComponent instances for the current GameObject
-	 */
 	private ArrayList<GameComponent> components;
 	
-	/**
-	 * Initialise the GameObject properties
-	 */
 	public GameObject() {
 		children = new ArrayList<GameObject>();
 		components = new ArrayList<GameComponent>();
 	}
-
-	/**
-	 * Add a GameObject to the GameObject ArrayList
-	 * @param child
-	 */
+	
 	public void addChild(GameObject child) {
 		children.add(child);
 	}
 	
-	/**
-	 * Add a GameComponent to the GameComponent ArrayList
-	 * @param component
-	 */
+	public void addChildren(GameObject... children) {
+		for(GameObject child: children) this.children.add(child);
+	}
+	
+	public void addChildren(List<GameObject> children) {
+		for(GameObject child: children) this.children.add(child);
+	}
+	
 	public void addComponent(GameComponent component) {
 		components.add(component);
 	}
-
-	/**
-	 * Loop through the GameObject and GameComponent ArrayLists and call the update function
-	 * @param delta
-	 */
+	
+	public void addComponents(GameComponent... components) {
+		for(GameComponent component: components) this.components.add(component);
+	}
+	
+	public void addComponents(List<GameComponent> components) {
+		for(GameComponent component: components) this.components.add(component);
+	}
+	
+	public void removeChild(int index) {
+		children.remove(index);
+	}
+	
+	public void removeChild(GameObject child) {
+		children.remove(child);
+	}
+	
+	public void removeChildren(int... children) {
+		for(int child: children) this.children.remove(child);
+	}
+	
+	public void removeChildren(GameObject... children) {
+		for(GameObject child: children) this.children.remove(child);
+	}
+	
+	public void removeComponent(int index) {
+		components.remove(index);
+	}
+	
+	public void removeComponent(GameComponent component) {
+		components.remove(component);
+	}
+	
+	public void removeComponents(int... components) {
+		for(int component: components) this.components.remove(component);
+	}
+	
+	public void removeComponents(GameComponent... components) {
+		for(GameComponent component: components) this.components.remove(component);
+	}
+	
+	public ArrayList<GameObject> getChildren() {
+		return children;
+	}
+	
+	public Iterator<GameObject> getChildIterator() {
+		return children.iterator();
+	}
+	
+	public ArrayList<GameComponent> getComponents() {
+		return components;
+	}
+	
+	public Iterator<GameComponent> getComponentIterator() {
+		return components.iterator();
+	}
+	
 	public void update(float delta) {
-		for(GameComponent component : components)
-			component.update(delta);
-			
-		for (GameObject child : children)
-			child.update(delta);
+		for(GameObject child: children) child.update(delta);
+		for(GameComponent component: components) component.update(delta);
 	}
-
-	/**
-	 * Loop through the GameObject and GameComponent ArrayLists and call the render function
-	 */
+	
 	public void render() {
-		for(GameComponent component : components)
-			component.render();
-		
-		for (GameObject child : children)
-			child.render();
+		for(GameObject child: children) child.render();
+		for(GameComponent component: components) component.render();
 	}
-
-	/**
-	 * Loop through the GameObject and GameComponent ArrayLists and call the dispose function
-	 */
+	
 	public void dispose() {
-		for(GameComponent component : components)
-			component.dispose();
-		
-		for (GameObject child : children)
-			child.dispose();
+		for(GameObject child: children) child.dispose();
+		for(GameComponent component: components) component.dispose();
 	}
 	
 }
