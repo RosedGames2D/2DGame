@@ -1,5 +1,8 @@
 package com.rosedgames.core;
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 public abstract class Entity extends GameObject {
@@ -10,82 +13,140 @@ public abstract class Entity extends GameObject {
 	
 	private Vector2 pos;
 	private Vector2 dim;
-	private Vector2 velocity = new Vector2(0, 0);
+	private Rectangle bounds;
+	private Vector2 velocity;
 	private float speed = 2.0f;
-	private String name;
+	private float delta = 0.0f;
+	private float health = 100f;
+	private float maxHealth = 100f;
+	private transient Sprite sprite;
+	public static transient SpriteBatch batch;
 	private EntityType type;
 	
-	public Entity(Vector2 pos, Vector2 dim, String name) {
+	public Entity(Vector2 pos, Vector2 dim, Sprite sprite) {
 		this.pos = pos;
 		this.dim = dim;
-		this.name = name;
-		this.type = EntityType.DOCILE;
+		this.velocity = new Vector2(0, 0);
+		this.sprite = sprite;
+		this.sprite.setPosition(pos.x, pos.y);
+		this.bounds = new Rectangle(this.pos.x, this.pos.y, this.dim.x, this.dim.y);
+		type = EntityType.DOCILE;
 	}
 	
 	@Override
 	public void update(float delta) {
 		super.update(delta);
-		//Update stuff...
+		this.delta = delta;
+		
+		pos.x = pos.x + velocity.x * delta;
+		pos.y = pos.y + velocity.y * delta;
+
+		sprite.setPosition(pos.x, pos.y);
+		bounds.set(pos.x, pos.y, dim.x, dim.y);
 	}
-	
+
 	@Override
 	public void render() {
 		super.render();
-		//Render stuff...
+		getSprite().draw(getBatch());
 	}
 	
 	@Override
 	public void dispose() {
 		super.dispose();
-		//Disposal stuff...
+		getSprite().getTexture().dispose();
 	}
 
 	public Vector2 getPos() {
 		return pos;
 	}
 
-	public void setPos(Vector2 pos) {
-		this.pos = pos;
-	}
-
 	public Vector2 getDim() {
 		return dim;
+	}
+
+	public Sprite getSprite() {
+		return sprite;
+	}
+
+	public SpriteBatch getBatch() {
+		return batch;
+	}
+	
+	public Vector2 getVelocity() {
+		return velocity;
+	}
+	
+	public EntityType getType() {
+		return type;
+	}
+	
+	public float getSpeed() {
+		return speed;
+	}
+	
+	public float getDelta() {
+		return delta;
+	}
+	
+	public void setPos(Vector2 pos) {
+		this.pos = pos;
 	}
 
 	public void setDim(Vector2 dim) {
 		this.dim = dim;
 	}
 
-	public Vector2 getVelocity() {
-		return velocity;
+	public void setSprite(Sprite sprite) {
+		this.sprite = sprite;
 	}
 
 	public void setVelocity(Vector2 velocity) {
 		this.velocity = velocity;
 	}
 
-	public float getSpeed() {
-		return speed;
+	public void setType(EntityType type) {
+		this.type = type;
 	}
 
 	public void setSpeed(float speed) {
 		this.speed = speed;
 	}
-
-	public String getName() {
-		return name;
+	
+	public void damage(float amt) {
+		if(this.health - amt < 1) dispose();
+		this.health -= amt;
+	}
+	
+	public void heal(float amt) {
+		if(this.health + amt > maxHealth) {
+			amt = this.maxHealth - health;
+		}
+		this.health += amt;
+	}
+	
+	public float getHealth() {
+		return this.health;
+	}
+	
+	public void setHealth(float health) {
+		this.health = health;
+	}
+	
+	public float getMaxHealth() {
+		return this.maxHealth;
+	}
+	
+	public void setMaxHealth(float health) {
+		this.maxHealth = health;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public Rectangle getBounds() {
+		return bounds;
 	}
 
-	public EntityType getType() {
-		return type;
-	}
-
-	public void setType(EntityType type) {
-		this.type = type;
+	public void setBounds(Rectangle bounds) {
+		this.bounds = bounds;
 	}
 	
 }

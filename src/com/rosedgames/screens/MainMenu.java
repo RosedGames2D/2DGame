@@ -2,9 +2,9 @@ package com.rosedgames.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.rosedgames.core.Game;
+import com.rosedgames.core.GameSave;
+import com.rosedgames.core.GameSaveManager;
 import com.rosedgames.core.Screen;
-import com.rosedgames.ui.UIHandler;
-import com.rosedgames.uis.UIMainMenu;
 
 public class MainMenu extends Screen {
 	
@@ -16,11 +16,10 @@ public class MainMenu extends Screen {
 	public void init() {
 		Gdx.gl.glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 		
-		UIMainMenu gui = new UIMainMenu("UIMainMenu");
+		GameSaveManager.load("one");
+		GameSave save = GameSaveManager.getSave("one");
 		
-		UIHandler.addUI(gui);
-		
-		getRoot().addChild(UIHandler.getUI("UIMainMenu"));
+		System.out.println(save.getSaveData());
 	}
 	
 	@Override

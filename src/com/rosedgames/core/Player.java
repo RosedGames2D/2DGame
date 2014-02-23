@@ -1,127 +1,105 @@
 package com.rosedgames.core;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
+import com.rosedgames.utils.ResourceLoader;
 
-public class Player extends Entity {
+public class Player extends Entity implements InputProcessor {
 
-	private OrthographicCamera camera;
-	private World world;
-	private InputProcessor inputProcessor;
-	private Sprite sprite;
-	private boolean canJump = true;
+	private int facing = 0;
 	
 	public Player(Vector2 pos) {
-		super(pos, new Vector2(32, 32), "Player");
-		
-		camera = new OrthographicCamera();
-		camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight()); //May change viewport later
-		
-		inputProcessor = new InputProcessor() {
-			
-			@Override
-			public boolean touchUp(int screenX, int screenY, int pointer, int button) {return false;}
-			
-			@Override
-			public boolean touchDragged(int screenX, int screenY, int pointer) {return false;}
-			
-			@Override
-			public boolean touchDown(int screenX, int screenY, int pointer, int button) {return false;}
-			
-			@Override
-			public boolean scrolled(int amount) {return false;}
-			
-			@Override
-			public boolean mouseMoved(int screenX, int screenY) {return false;}
-			
-			@Override
-			public boolean keyTyped(char character) {return false;}
-			
-			@Override
-			public boolean keyUp(int keycode) {
-				switch(keycode) {
-					case Keys.A:
-					case Keys.D:
-						getVelocity().x = 0;
-				}
-				return true;
-			}
-			
-			@Override
-			public boolean keyDown(int keycode) {
-				switch(keycode) {
-					case Keys.SPACE:
-						if(canJump) {
-							getVelocity().y = getSpeed() / 1.8f;
-							canJump = false;
-						}
-						break;
-					case Keys.A:
-						getVelocity().x = -getSpeed();
-						break;
-					case Keys.D:
-						getVelocity().x = getSpeed();
-						break;
-				}
-				return true;
-			}
-		};
-	
-		sprite = new Sprite(new Texture(System.getProperty("user.dir") + "/resources/textures/sprites/player.png")); //No animation yet
-	}
-	
-	public Player() {
-		this(new Vector2(0, 0));
+		super(pos, new Vector2(24, 24), ResourceLoader.loadSprite("player"));
+		setSpeed(150f);
 	}
 	
 	@Override
 	public void update(float delta) {
 		super.update(delta);
+	}
+	
+	@Override
+	public boolean keyDown(int keycode) {
 		
-		getVelocity().y -= 20f /* soon to be World.getGravity() */ / delta;
-		
-		if(getVelocity().y == 0 /* or collision on with ground */) {
-			canJump = true;
+		switch(keycode) {
+			case Keys.W:
+				getVelocity().y = getSpeed();
+				if(facing != 0) {
+					getSprite().setRotation(0);
+					facing = 0;
+				}
+				break;
+			case Keys.S:
+				getVelocity().y = -getSpeed();
+				if(facing != 1) {
+					getSprite().setRotation(180);
+					facing = 1;
+				}
+				break;
+			case Keys.A:
+				getVelocity().x = -getSpeed();
+				if(facing != 2) {
+					getSprite().setRotation(90);
+					facing = 2;
+				}
+				break;
+			case Keys.D:
+				getVelocity().x = getSpeed();
+				if(facing != 3) {
+					getSprite().setRotation(270);
+					facing = 3;
+				}
+				break;
 		}
 		
-		getPos().x = (getPos().x + getVelocity().x) * delta;
-		getPos().y = (getPos().y + getVelocity().y) * delta;
+		return true;
+	}
+
+	@Override
+	public boolean keyUp(int keycode) {
+		switch(keycode) {
+			case Keys.W:
+			case Keys.S:
+				getVelocity().y = 0;
+				break;
+			case Keys.A:
+			case Keys.D:
+				getVelocity().x = 0;
+				break;
+		}
 		
-		sprite.setX(getPos().x);
-		sprite.setY(getPos().y);
+		return true;
 	}
-	
+
 	@Override
-	public void render() {
-		super.render();
-		//Render stuff...
+	public boolean keyTyped(char character) {
+		return false;
 	}
-	
+
 	@Override
-	public void dispose() {
-		super.dispose();
-		//Disposal stuff...
+	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+		return false;
 	}
 
-	public World getWorld() {
-		return world;
+	@Override
+	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+		return false;
 	}
 
-	public void setWorld(World world) {
-		this.world = world;
+	@Override
+	public boolean touchDragged(int screenX, int screenY, int pointer) {
+		return false;
 	}
 
-	public InputProcessor getInputProcessor() {
-		return inputProcessor;
+	@Override
+	public boolean mouseMoved(int screenX, int screenY) {
+		return false;
 	}
 
-	public void setInputProcessor(InputProcessor inputProcessor) {
-		this.inputProcessor = inputProcessor;
+	@Override
+	public boolean scrolled(int amount) {
+		return false;
 	}
 	
 }

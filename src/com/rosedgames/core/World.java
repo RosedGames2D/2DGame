@@ -2,6 +2,7 @@ package com.rosedgames.core;
 
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Vector2;
 
 public class World extends GameObject {
 
@@ -18,7 +19,7 @@ public class World extends GameObject {
 	
 	private void init() {
 		this.renderer = new OrthogonalTiledMapRenderer(map);
-		this.player = new Player(); //Get from save file soon
+		this.player = new Player(new Vector2(100, 10)); //Get from save file soon
 		
 		//Load Map Properties, GameObjects, GameComponents etc...
 	}
