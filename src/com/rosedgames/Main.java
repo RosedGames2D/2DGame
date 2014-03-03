@@ -21,6 +21,13 @@ public class Main extends Game {
 		setScreen(getScreen("Main Menu"));
 	}
 	
+	@Override
+	public void dispose() {
+		GameSaveManager.saveAll();
+		
+		super.dispose();
+	}
+	
 	public static void main(String[] args){
 		ApplicationCreator.createLwjglApplication(new Main());
 	}

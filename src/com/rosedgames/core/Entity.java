@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.rosedgames.utils.ResourceLoader;
 
 public abstract class Entity extends GameObject {
 
@@ -22,19 +23,22 @@ public abstract class Entity extends GameObject {
 	private transient Sprite sprite;
 	public static transient SpriteBatch batch;
 	private EntityType type;
+	private String spriteFile;
 	
-	public Entity(Vector2 pos, Vector2 dim, Sprite sprite) {
+	public Entity(Vector2 pos, Vector2 dim, String spriteFile) {
 		this.pos = pos;
 		this.dim = dim;
 		this.velocity = new Vector2(0, 0);
-		this.sprite = sprite;
+		this.sprite = ResourceLoader.loadSprite(spriteFile);
 		this.sprite.setPosition(pos.x, pos.y);
+		this.spriteFile = spriteFile;
 		this.bounds = new Rectangle(this.pos.x, this.pos.y, this.dim.x, this.dim.y);
 		type = EntityType.DOCILE;
 	}
 	
 	@Override
 	public void update(float delta) {
+		if(this.sprite == null) this.sprite = ResourceLoader.loadSprite(this.spriteFile);
 		super.update(delta);
 		this.delta = delta;
 		

@@ -3,14 +3,13 @@ package com.rosedgames.core;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
-import com.rosedgames.utils.ResourceLoader;
 
 public class Player extends Entity implements InputProcessor {
 
 	private int facing = 0;
 	
 	public Player(Vector2 pos) {
-		super(pos, new Vector2(24, 24), ResourceLoader.loadSprite("player"));
+		super(pos, new Vector2(24, 24), "player");
 		setSpeed(150f);
 	}
 	

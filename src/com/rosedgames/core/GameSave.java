@@ -40,9 +40,6 @@ public class GameSave {
 			json = "";
 			for(byte c: data) json += (char)c;
 			GsonBuilder builder = new GsonBuilder();
-			
-			
-			
 			Gson gson = builder.create();
 			this.data = gson.fromJson(json, SaveData.class);
 			isLoaded = true;

@@ -19,7 +19,6 @@ public class MainMenu extends Screen {
 		GameSaveManager.load("one");
 		GameSave save = GameSaveManager.getSave("one");
 		
-		System.out.println(save.getSaveData());
 	}
 	
 	@Override
