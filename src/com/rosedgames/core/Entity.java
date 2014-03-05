@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.rosedgames.items.Inventory;
 import com.rosedgames.utils.ResourceLoader;
 
 public abstract class Entity extends GameObject {
@@ -24,6 +25,7 @@ public abstract class Entity extends GameObject {
 	public static transient SpriteBatch batch;
 	private EntityType type;
 	private String spriteFile;
+	private Inventory inventory;
 	
 	public Entity(Vector2 pos, Vector2 dim, String spriteFile) {
 		this.pos = pos;
@@ -33,7 +35,8 @@ public abstract class Entity extends GameObject {
 		this.sprite.setPosition(pos.x, pos.y);
 		this.spriteFile = spriteFile;
 		this.bounds = new Rectangle(this.pos.x, this.pos.y, this.dim.x, this.dim.y);
-		type = EntityType.DOCILE;
+		this.type = EntityType.DOCILE;
+		this.inventory = new Inventory(1);
 	}
 	
 	@Override
@@ -151,6 +154,14 @@ public abstract class Entity extends GameObject {
 
 	public void setBounds(Rectangle bounds) {
 		this.bounds = bounds;
+	}
+	
+	public Inventory getInventory() {
+		return inventory;
+	}
+	
+	public void setInventory(Inventory inventory) {
+		this.inventory = inventory;
 	}
 	
 }

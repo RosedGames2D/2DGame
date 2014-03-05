@@ -3,6 +3,7 @@ package com.rosedgames.core;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
+import com.rosedgames.items.Inventory;
 
 public class Player extends Entity implements InputProcessor {
 
@@ -11,6 +12,7 @@ public class Player extends Entity implements InputProcessor {
 	public Player(Vector2 pos) {
 		super(pos, new Vector2(24, 24), "player");
 		setSpeed(150f);
+		setInventory(new Inventory(64));
 	}
 	
 	@Override

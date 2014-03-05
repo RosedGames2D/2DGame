@@ -9,10 +9,8 @@ import java.io.IOException;
 import java.util.Base64;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Vector2;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.rosedgames.items.Inventory;
 
 public class GameSave {
 
@@ -57,9 +55,7 @@ public class GameSave {
 		}
 		
 		data = new SaveData();
-		data.player = new Player(new Vector2(32, 32));
-		data.inventory = new Inventory();
-		data.level = "Root";
+		data.world = new World("default_world");
 		
 		save();
 	}
@@ -101,9 +97,7 @@ public class GameSave {
 	}
 	
 	public final class SaveData {
-		public Player player;
-		public String level;
-		public Inventory inventory;
+		public World world;
 	}
 	
 }
